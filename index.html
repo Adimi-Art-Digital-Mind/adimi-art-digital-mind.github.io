@@ -6,8 +6,9 @@
   <title>Adimi | AI-Powered Art Learning for Creativity and Agency</title>
   <meta name="description" content="Adimi is an AI EdTech project creating a new way for young learners to learn art. Students draw. AI compares. Students decide." />
   <meta name="theme-color" content="#2563EB" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
 
-  <!-- Typography: Fredoka (headings) + Nunito (body) — UI UX Pro Max "Playful Creative" pairing -->
+  <!-- Typography: Fredoka (headings) + Nunito (body) - UI UX Pro Max "Playful Creative" pairing -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -136,6 +137,17 @@
       font-size: 1.25rem;
       text-decoration: none;
       color: var(--color-fg);
+    }
+    .logo-img { height: 40px; width: auto; display: block; }
+    .footer-brand .logo-img { height: 44px; }
+    .hero-logo {
+      height: clamp(120px, 22vw, 240px);
+      width: auto;
+      max-width: 100%;
+      display: block;
+      /* Negative margins trim the PNG's built-in whitespace so the wordmark
+         sits tight against the badge above and the headline below */
+      margin: -14px 0 -70px -10px;
     }
     .logo-mark {
       width: 40px;
@@ -534,10 +546,7 @@
   <header>
     <div class="wrap header-inner">
       <a class="logo" href="#home" aria-label="Adimi home">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5L12 3z" fill="currentColor"/></svg>
-        </span>
-        <span>Adimi</span>
+        <img class="logo-img" src="assets/logo.png" alt="Adimi" width="120" height="40" />
       </a>
       <nav class="main-nav" aria-label="Main navigation">
         <span class="nav-links" style="display:contents">
@@ -559,7 +568,7 @@
       <div>
         <span class="badge"><span class="dot" aria-hidden="true"></span> AI-powered art learning for creativity &amp; agency</span>
 
-        <h1>ADIMI<br /><span class="grad">Create. Observe. Decide.</span></h1>
+        <h1><img class="hero-logo" src="assets/logo.png" alt="Adimi" /><span class="grad">Create. Observe. Decide.</span></h1>
 
         <p class="tagline">Empowering young minds to create, observe, and decide.</p>
 
@@ -622,7 +631,7 @@
         </p>
         <p class="lead">
           Yet most digital learning tools focus on delivering instructions, while generative AI can go even further
-          by creating the artwork itself. Adimi takes a different approach — we build technology that supports the
+          by creating the artwork itself. Adimi takes a different approach - we build technology that supports the
           creative process without taking ownership of it.
         </p>
         <p class="lead">
@@ -693,7 +702,7 @@
     <section class="block" id="solution">
       <div class="wrap">
         <span class="eyebrow">Our Solution</span>
-        <h2 class="title">A complete learning loop — from intention to reflection</h2>
+        <h2 class="title">A complete learning loop - from intention to reflection</h2>
         <p class="lead">Adimi turns one drawing session into a structured learning experience.</p>
         <div class="grid grid-3">
           <div class="card"><span class="step-num">01 · Learn</span><p>A short art lesson introduces one concept.</p></div>
@@ -844,7 +853,7 @@
           <div class="card"><h3>Agency</h3><p>We believe learners should remain the authors of their own decisions.</p></div>
           <div class="card"><h3>Curiosity</h3><p>Unexpected results are not necessarily mistakes. They can become discoveries.</p></div>
           <div class="card"><h3>Evidence</h3><p>AI should distinguish between what it can measure and what it cannot know.</p></div>
-          <div class="card"><h3>Responsibility</h3><p>Technology for children needs clear boundaries — especially when AI is involved.</p></div>
+          <div class="card"><h3>Responsibility</h3><p>Technology for children needs clear boundaries - especially when AI is involved.</p></div>
           <div class="card"><h3>Creativity</h3><p>The goal is not to make AI more creative than the learner. The goal is to help the learner become more creative.</p></div>
         </div>
       </div>
@@ -914,10 +923,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a class="logo" href="#home" aria-label="Adimi home">
-            <span class="logo-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5L12 3z" fill="currentColor"/></svg>
-            </span>
-            <span>Adimi</span>
+            <img class="logo-img" src="assets/logo.png" alt="Adimi" width="132" height="44" />
           </a>
           <p>Students draw. AI compares. Students decide.</p>
           <p class="micro">Education · Art · AI · Human Agency</p>
