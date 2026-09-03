@@ -3,357 +3,919 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adimi Art Digital Mind | Coming Soon</title>
+  <title>Adimi | AI-Powered Art Learning for Creativity and Agency</title>
+  <meta name="description" content="Adimi is an AI EdTech project creating a new way for young learners to learn art. Students draw. AI compares. Students decide." />
+  <meta name="theme-color" content="#2563EB" />
+
+  <!-- Typography: Fredoka (headings) + Nunito (body) — UI UX Pro Max "Playful Creative" pairing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
+    /* ============================================================
+       DESIGN TOKENS  (generated via UI UX Pro Max design system)
+       Style: Minimalism & Swiss + soft/friendly warmth
+       Palette: Learning blue + play amber + creative coral (light)
+       ============================================================ */
     :root {
-      --bg: #080814;
-      --card: rgba(255, 255, 255, 0.08);
-      --text: #ffffff;
-      --muted: #b8b8d8;
-      --accent: #8b5cf6;
-      --accent-2: #22d3ee;
-      --accent-3: #f472b6;
+      /* Brand / semantic colors */
+      --color-primary: #2563EB;      /* learning blue */
+      --color-primary-dark: #1D4ED8;
+      --color-on-primary: #FFFFFF;
+      --color-secondary: #0D9488;    /* calm teal */
+      --color-accent: #F59E0B;       /* play amber */
+      --color-coral: #EC4899;        /* creative pink */
+      --color-on-accent: #1F2937;
+
+      --color-bg: #F8FAFF;           /* soft learning-blue tinted white */
+      --color-surface: #FFFFFF;
+      --color-surface-alt: #EFF4FF;  /* pale blue section band */
+      --color-fg: #0F172A;           /* near-black slate */
+      --color-muted-fg: #475569;     /* body / secondary text */
+      --color-border: #E2E8F0;
+
+      /* Typography */
+      --font-head: "Fredoka", system-ui, sans-serif;
+      --font-body: "Nunito", system-ui, -apple-system, sans-serif;
+
+      /* Spacing scale (4pt base) */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+
+      /* Radius */
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+
+      /* Shadows (soft, subtle depth) */
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 20px 50px rgba(37, 99, 235, 0.14);
+
+      --maxw: 1200px;
+      --transition: 200ms ease;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(139, 92, 246, 0.35), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.25), transparent 32%),
-        linear-gradient(135deg, #080814 0%, #11112a 50%, #050510 100%);
+      font-family: var(--font-body);
+      color: var(--color-fg);
+      background: var(--color-bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    .page {
-      width: min(1120px, 92%);
-      margin: 0 auto;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    h1, h2, h3, .h {
+      font-family: var(--font-head);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      color: var(--color-fg);
     }
 
+    a { color: inherit; }
+
+    .wrap { width: min(var(--maxw), 92%); margin: 0 auto; }
+
+    /* Visible focus for keyboard nav */
+    a:focus-visible,
+    button:focus-visible,
+    .btn:focus-visible {
+      outline: 3px solid var(--color-primary);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 8px;
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      z-index: 100;
+    }
+    .skip-link:focus { left: 8px; }
+
+    /* ---------- Header ---------- */
     header {
-      padding: 28px 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248, 250, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: var(--space-6);
+      padding: var(--space-4) 0;
     }
-
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .logo-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display: grid;
-      place-items: center;
-      box-shadow: 0 0 30px rgba(139, 92, 246, 0.55);
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 22px;
-      font-size: 0.95rem;
-    }
-
-    nav a:hover {
-      color: var(--text);
-    }
-
-    .coming-banner {
-      margin-top: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: linear-gradient(90deg, rgba(139, 92, 246, 0.35), rgba(34, 211, 238, 0.22), rgba(244, 114, 182, 0.28));
-      border-radius: 999px;
-      padding: 12px 22px;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(16px);
-      animation: glow 3s ease-in-out infinite alternate;
+      gap: var(--space-3);
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.25rem;
+      text-decoration: none;
+      color: var(--color-fg);
     }
-
-    .pulse {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent-2);
-      box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7);
-      animation: pulse 1.8s infinite;
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      box-shadow: var(--shadow-sm);
     }
+    nav.main-nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-2) var(--space-6);
+    }
+    nav.main-nav a {
+      color: var(--color-muted-fg);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color var(--transition);
+    }
+    nav.main-nav a:hover { color: var(--color-primary); }
 
-    main {
-      flex: 1;
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      justify-content: center;
+      border: 0;
+      border-radius: var(--radius-pill);
+      padding: 14px 26px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .btn-primary {
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:hover { background: var(--color-primary-dark); transform: translateY(-2px); }
+    .btn-secondary {
+      background: var(--color-surface);
+      color: var(--color-primary);
+      border: 1.5px solid var(--color-border);
+    }
+    .btn-secondary:hover { border-color: var(--color-primary); transform: translateY(-2px); }
+    .nav-cta {
+      background: var(--color-primary);
+      color: var(--color-on-primary) !important;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-cta:hover { background: var(--color-primary-dark); }
+
+    /* ---------- Sections ---------- */
+    section.block { padding: var(--space-20) 0; }
+    .alt-bg {
+      background: var(--color-surface-alt);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      background: var(--color-surface-alt);
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-4);
+    }
+    .alt-bg .eyebrow { background: var(--color-surface); }
+    h2.title {
+      font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+      margin-bottom: var(--space-4);
+      max-width: 20ch;
+    }
+    .lead {
+      color: var(--color-muted-fg);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      max-width: 780px;
+    }
+    .lead + .lead { margin-top: var(--space-4); }
+
+    /* ---------- Hero ---------- */
+    .hero {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
       align-items: center;
-      gap: 54px;
-      padding: 42px 0 72px;
+      gap: var(--space-16);
+      padding: var(--space-16) 0 var(--space-20);
     }
-
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-muted-fg);
+      box-shadow: var(--shadow-sm);
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--color-secondary);
+      box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.5);
+      animation: pulse 2s infinite;
+    }
     .hero h1 {
-      font-size: clamp(3rem, 7vw, 6.8rem);
-      line-height: 0.95;
-      letter-spacing: -0.07em;
-      margin: 28px 0 24px;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      margin: var(--space-6) 0 var(--space-4);
     }
-
-    .hero h1 span {
-      display: block;
-      background: linear-gradient(90deg, #fff, var(--accent-2), var(--accent-3));
+    .hero h1 .grad {
+      background: linear-gradient(100deg, var(--color-primary), var(--color-coral), var(--color-accent));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
-
-    .hero p {
-      max-width: 620px;
-      color: var(--muted);
-      font-size: 1.15rem;
-      line-height: 1.8;
-      margin-bottom: 34px;
+    .hero .tagline { font-size: 1.25rem; font-weight: 700; color: var(--color-fg); margin-bottom: var(--space-4); }
+    .hero p.desc { color: var(--color-muted-fg); font-size: 1.05rem; max-width: 600px; margin-bottom: var(--space-4); }
+    .slogan {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-weight: 600;
+      color: var(--color-primary);
+      background: var(--color-surface);
+      border: 1px dashed var(--color-primary);
+      padding: 8px 18px;
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-8);
     }
+    .actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-6); }
+    .hero .note { font-size: 0.92rem; color: var(--color-muted-fg); }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 999px;
-      padding: 15px 24px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btn-primary {
-      color: #080814;
-      background: linear-gradient(135deg, var(--accent-2), #ffffff);
-      box-shadow: 0 16px 45px rgba(34, 211, 238, 0.3);
-    }
-
-    .btn-secondary {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    .visual {
+    /* Hero visual: friendly loop card */
+    .hero-visual {
       position: relative;
-      min-height: 470px;
-      border-radius: 36px;
-      background: var(--card);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      overflow: hidden;
-      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
-      backdrop-filter: blur(20px);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-lg);
+    }
+    .loop {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+    .loop-step {
+      background: var(--color-surface-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      text-align: center;
+      transition: transform var(--transition);
+    }
+    .loop-step:hover { transform: translateY(-4px); }
+    .loop-step .ic {
+      width: 44px; height: 44px; margin: 0 auto var(--space-3);
+      display: grid; place-items: center;
+      border-radius: 12px;
+      color: #fff;
+    }
+    .loop-step:nth-child(1) .ic { background: var(--color-primary); }
+    .loop-step:nth-child(2) .ic { background: var(--color-secondary); }
+    .loop-step:nth-child(3) .ic { background: var(--color-accent); }
+    .loop-step:nth-child(4) .ic { background: var(--color-coral); }
+    .loop-step h3 { font-size: 1.05rem; margin-bottom: 2px; }
+    .loop-step p { font-size: 0.85rem; color: var(--color-muted-fg); line-height: 1.4; }
+    .hero-visual .caption {
+      text-align: center;
+      margin-top: var(--space-6);
+      font-family: var(--font-head);
+      font-weight: 600;
+      color: var(--color-fg);
     }
 
-    .visual::before {
-      content: "";
-      position: absolute;
-      inset: -25%;
-      background:
-        conic-gradient(from 90deg, transparent, rgba(34, 211, 238, 0.35), transparent, rgba(139, 92, 246, 0.45), transparent);
-      animation: rotate 10s linear infinite;
+    /* ---------- Grids & cards ---------- */
+    .grid { display: grid; gap: var(--space-6); margin-top: var(--space-12); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #C7D7FE; }
+    .card .icon {
+      width: 48px; height: 48px;
+      display: grid; place-items: center;
+      border-radius: 14px;
+      background: var(--color-surface-alt);
+      color: var(--color-primary);
+      margin-bottom: var(--space-4);
+    }
+    .card .icon svg { width: 24px; height: 24px; }
+    .card h3 { font-size: 1.2rem; margin-bottom: var(--space-2); }
+    .card p { color: var(--color-muted-fg); font-size: 0.98rem; line-height: 1.65; }
+    .card .step-num {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: var(--color-primary);
+      background: var(--color-surface-alt);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: var(--space-3);
     }
 
-    .mind-card {
-      position: absolute;
-      inset: 18px;
-      border-radius: 28px;
-      background: rgba(8, 8, 20, 0.88);
+    .callout {
+      text-align: center;
+      font-family: var(--font-head);
+      font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+      font-weight: 600;
+      line-height: 1.4;
+      margin-top: var(--space-12);
+      color: var(--color-primary);
+    }
+
+    /* ---------- MVP video ---------- */
+    .video-box {
+      margin-top: var(--space-12);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      background: linear-gradient(135deg, #EFF4FF, #FFF7ED);
+      min-height: 300px;
       display: grid;
       place-items: center;
-      padding: 34px;
       text-align: center;
+      padding: var(--space-12);
+      box-shadow: var(--shadow-md);
     }
-
-    .orb {
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 25%, #fff, rgba(255,255,255,0.25) 16%, transparent 25%),
-        radial-gradient(circle, rgba(34, 211, 238, 0.95), rgba(139, 92, 246, 0.8) 50%, rgba(244, 114, 182, 0.45));
-      box-shadow:
-        0 0 70px rgba(34, 211, 238, 0.45),
-        inset 0 0 50px rgba(255, 255, 255, 0.22);
-      margin-bottom: 28px;
+    .play-btn {
+      width: 74px; height: 74px; border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      display: grid; place-items: center;
+      margin: 0 auto var(--space-4);
+      box-shadow: var(--shadow-lg);
+      border: none; cursor: pointer;
+      transition: transform var(--transition);
     }
+    .play-btn:hover { transform: scale(1.06); }
+    .play-btn svg { width: 30px; height: 30px; margin-left: 4px; }
 
-    .mind-card h2 {
-      font-size: 2rem;
-      margin-bottom: 12px;
+    /* ---------- Team ---------- */
+    .subhead {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--color-primary);
+      margin: var(--space-12) 0 var(--space-6);
     }
-
-    .mind-card p {
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 360px;
+    .team-member .avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-coral));
+      color: #fff; display: grid; place-items: center;
+      font-family: var(--font-head); font-weight: 700; font-size: 1.1rem;
+      margin-bottom: var(--space-4);
     }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 48px;
+    .team-member strong { display: block; font-family: var(--font-head); font-size: 1.05rem; }
+    .team-member .role { color: var(--color-primary); font-weight: 700; font-size: 0.9rem; margin: 2px 0 6px; }
+    .team-member .cred { color: var(--color-muted-fg); font-size: 0.9rem; line-height: 1.5; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-top: var(--space-6); }
+    .pill {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 16px 22px;
     }
+    .pill strong { display: block; font-family: var(--font-head); margin-bottom: 2px; }
+    .pill span { color: var(--color-muted-fg); font-size: 0.9rem; }
 
-    .feature {
-      padding: 20px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    /* ---------- Contact ---------- */
+    .contact-card {
+      margin-top: var(--space-12);
+      padding: var(--space-16) var(--space-8);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
     }
+    .contact-card h3 { color: #fff; font-size: 1.6rem; margin-bottom: var(--space-3); }
+    .contact-card p { color: rgba(255,255,255,0.9); margin-bottom: var(--space-2); }
+    .contact-card a.link { color: #fff; font-weight: 700; text-decoration: underline; }
+    .contact-card .btn-primary { background: #fff; color: var(--color-primary); margin-top: var(--space-6); }
+    .contact-card .btn-primary:hover { background: #F1F5F9; }
 
-    .feature strong {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    .feature span {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
+    /* ---------- Footer ---------- */
     footer {
-      color: rgba(255, 255, 255, 0.55);
-      padding: 24px 0 34px;
-      font-size: 0.92rem;
+      background: var(--color-fg);
+      color: #CBD5E1;
+      padding: var(--space-16) 0 var(--space-8);
+    }
+    footer .logo { color: #fff; }
+    .footer-grid {
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      gap: var(--space-12); align-items: flex-start;
+    }
+    .footer-brand p { max-width: 320px; line-height: 1.6; margin-top: var(--space-4); font-size: 0.95rem; }
+    .footer-brand .micro { color: #94A3B8; font-size: 0.85rem; margin-top: var(--space-3); }
+    .footer-links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer-links a { color: #CBD5E1; text-decoration: none; font-size: 0.95rem; }
+    .footer-links a:hover { color: #fff; }
+    .footer-title { font-family: var(--font-head); font-weight: 600; color: #fff; margin-bottom: var(--space-2); }
+    .footer-bottom {
+      margin-top: var(--space-12);
+      padding-top: var(--space-6);
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.85rem;
+      color: #94A3B8;
     }
 
+    /* ---------- Animations ---------- */
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.7); }
-      70% { box-shadow: 0 0 0 12px rgba(34, 211, 238, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
+      0% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(13, 148, 136, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0); }
     }
 
-    @keyframes glow {
-      from { box-shadow: 0 10px 35px rgba(139, 92, 246, 0.22); }
-      to { box-shadow: 0 16px 55px rgba(34, 211, 238, 0.32); }
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
     }
 
-    @keyframes rotate {
-      to { transform: rotate(360deg); }
+    /* ---------- Responsive: 1024 / 768 / 375 ---------- */
+    @media (max-width: 1024px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
     }
-
-    @media (max-width: 860px) {
-      header {
-        align-items: flex-start;
-      }
-
-      nav {
-        display: none;
-      }
-
-      main {
-        grid-template-columns: 1fr;
-        padding-top: 18px;
-      }
-
-      .visual {
-        min-height: 390px;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 768px) {
+      nav.main-nav .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; gap: var(--space-12); padding-top: var(--space-12); }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      section.block { padding: var(--space-16) 0; }
+    }
+    @media (max-width: 400px) {
+      .loop { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="logo" aria-label="Adimi Art Digital Mind">
-        <div class="logo-mark">✦</div>
-        <div>Adimi Art</div>
-      </div>
-      <nav aria-label="Main navigation">
-        <a href="#vision">Vision</a>
-        <a href="#features">Features</a>
-        <a href="mailto:hello@adimi.art">Contact</a>
+  <a class="skip-link" href="#about">Skip to content</a>
+
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="wrap header-inner">
+      <a class="logo" href="#home" aria-label="Adimi home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5L12 3z" fill="currentColor"/></svg>
+        </span>
+        <span>Adimi</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <span class="nav-links" style="display:contents">
+          <a href="#home">Home</a>
+          <a href="#about">About Adimi</a>
+          <a href="#solution">Our Solution</a>
+          <a href="#mvp">MVP &amp; Impact</a>
+          <a href="#team">Our Team</a>
+          <a href="#contact">Contact</a>
+        </span>
+        <a href="#partnership" class="nav-cta">Partner with Us</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero" id="vision">
-        <div class="coming-banner">
-          <span class="pulse"></span>
-          <strong>Coming Soon</strong>
-          <span>Adimi Art Digital Mind is awakening</span>
-        </div>
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="wrap hero" id="home">
+      <div>
+        <span class="badge"><span class="dot" aria-hidden="true"></span> AI-powered art learning for creativity &amp; agency</span>
 
-        <h1>
-          Art meets
-          <span>digital mind.</span>
-        </h1>
+        <h1>ADIMI<br /><span class="grad">Create. Observe. Decide.</span></h1>
 
-        <p>
-          Adimi Art Digital Mind is a future creative space where imagination, digital expression, and intelligent design come together to shape new visual experiences.
+        <p class="tagline">Empowering young minds to create, observe, and decide.</p>
+
+        <p class="desc">
+          Adimi is an AI EdTech project creating a new way for young learners to learn art, where technology
+          observes and supports, while learners remain the ones who interpret, create, and decide.
         </p>
 
-        <div class="actions">
-          <a class="btn btn-primary" href="mailto:hello@adimi.art">Get Early Access</a>
-          <a class="btn btn-secondary" href="#features">Explore the Idea</a>
-        </div>
-      </section>
+        <span class="slogan">Students draw. AI compares. Students decide.</span>
 
-      <section class="visual" aria-label="Digital mind visual">
-        <div class="mind-card">
-          <div>
-            <div class="orb" aria-hidden="true"></div>
-            <h2>Creative Intelligence</h2>
-            <p>A digital-first art concept designed for creators, dreamers, collectors, and future minds.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#about">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Explore Adimi
+          </a>
+          <a class="btn btn-secondary" href="#mvp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Watch MVP Demo
+          </a>
+        </div>
+
+        <p class="note">Designed for middle-school learners, particularly where access to art teachers is limited.</p>
+      </div>
+
+      <div class="hero-visual" aria-label="Adimi's four-step learning approach">
+        <div class="loop">
+          <div class="loop-step">
+            <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg></div>
+            <h3>Observe</h3>
+            <p>AI looks at the artwork the learner actually created.</p>
+          </div>
+          <div class="loop-step">
+            <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Compare</h3>
+            <p>It compares intention with measurable visual data.</p>
+          </div>
+          <div class="loop-step">
+            <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3m13.5-6.5l-2 2m-7 7l-2 2m11 0l-2-2m-7-7l-2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Reflect</h3>
+            <p>The learner sees the difference between views.</p>
+          </div>
+          <div class="loop-step">
+            <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Decide</h3>
+            <p>The learner chooses what to do next.</p>
           </div>
         </div>
-      </section>
-    </main>
-
-    <section class="features" id="features">
-      <div class="feature">
-        <strong>Digital Art</strong>
-        <span>Experimental visual ideas crafted for modern screens and immersive spaces.</span>
-      </div>
-      <div class="feature">
-        <strong>Mindful Design</strong>
-        <span>A calm, futuristic identity built around imagination and thoughtful creativity.</span>
-      </div>
-      <div class="feature">
-        <strong>Future Gallery</strong>
-        <span>A coming platform for showcasing concepts, collections, and digital experiences.</span>
+        <p class="caption">AI observes. The learner interprets. The learner decides.</p>
       </div>
     </section>
 
-    <footer>
-      © 2026 Adimi Art Digital Mind. All rights reserved. Launching soon.
-    </footer>
-  </div>
+    <!-- ===== About ===== -->
+    <section class="block alt-bg" id="about">
+      <div class="wrap">
+        <span class="eyebrow">About Adimi</span>
+        <h2 class="title">Redefining how AI supports creative learning</h2>
+        <p class="lead">
+          Art education is not only about producing a better-looking picture. It is about learning to observe,
+          experiment, make choices, understand outcomes, and develop your own way of thinking.
+        </p>
+        <p class="lead">
+          Yet most digital learning tools focus on delivering instructions, while generative AI can go even further
+          by creating the artwork itself. Adimi takes a different approach — we build technology that supports the
+          creative process without taking ownership of it.
+        </p>
+        <p class="lead">
+          Through short art lessons, guided intention-setting, offline drawing, AI-assisted observation and learner
+          reflection, Adimi helps students turn their own artwork into an opportunity to learn.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Positioning ===== -->
+    <section class="block" id="positioning">
+      <div class="wrap">
+        <span class="eyebrow">Our Positioning</span>
+        <h2 class="title">AI should support creativity, not replace it.</h2>
+        <div class="grid grid-4">
+          <div class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg></div>
+            <h3>Observe</h3>
+            <p>Adimi looks at the artwork the learner has actually created.</p>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Compare</h3>
+            <p>The system compares the learner's intention with measurable visual information from the artwork.</p>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3m9-9h-3M6 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/></svg></div>
+            <h3>Reflect</h3>
+            <p>The learner sees the difference between their own observation and the system's observation.</p>
+          </div>
+          <div class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Decide</h3>
+            <p>The learner chooses what the difference means and what to do next.</p>
+          </div>
+        </div>
+        <p class="callout">AI observes. The learner interprets. The learner decides.</p>
+      </div>
+    </section>
+
+    <!-- ===== Why Adimi ===== -->
+    <section class="block alt-bg" id="why">
+      <div class="wrap">
+        <span class="eyebrow">Why Adimi</span>
+        <h2 class="title">Built around learner agency</h2>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>Student first, AI second</h3>
+            <p>Before seeing the AI's observation, students first describe what they see in their own artwork. This makes AI feedback something to compare with, rather than something to automatically follow.</p>
+          </div>
+          <div class="card">
+            <h3>No automatic judgment</h3>
+            <p>Adimi does not tell students whether their artwork is good or bad. A result that differs from the original intention is not automatically treated as an error.</p>
+          </div>
+          <div class="card">
+            <h3>Measurable observation</h3>
+            <p>Our MVP begins with deterministic computer vision rather than asking a language model to freely interpret an image. The system measures visual information through image processing and a 3×3 grid, then either describes the result or explicitly refuses to make a conclusion when the data is insufficient.</p>
+          </div>
+          <div class="card">
+            <h3>Designed with boundaries</h3>
+            <p>Adimi does not draw for students, grade their artwork, evaluate talent, compare students, or infer personality or psychological states.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Our Solution ===== -->
+    <section class="block" id="solution">
+      <div class="wrap">
+        <span class="eyebrow">Our Solution</span>
+        <h2 class="title">A complete learning loop — from intention to reflection</h2>
+        <p class="lead">Adimi turns one drawing session into a structured learning experience.</p>
+        <div class="grid grid-3">
+          <div class="card"><span class="step-num">01 · Learn</span><p>A short art lesson introduces one concept.</p></div>
+          <div class="card"><span class="step-num">02 · Set an Intention</span><p>Students choose references, answer guiding questions and define what they want to explore.</p></div>
+          <div class="card"><span class="step-num">03 · Draw</span><p>Students draw independently on paper. AI steps away from the creative process.</p></div>
+          <div class="card"><span class="step-num">04 · Observe</span><p>Students photograph their work and describe what they see before receiving AI feedback.</p></div>
+          <div class="card"><span class="step-num">05 · Decide</span><p>Students choose: Keep · Edit · Think Further.</p></div>
+          <div class="card"><span class="step-num">06 · Reflect</span><p>Students reflect on the decision they have made.</p></div>
+        </div>
+        <p class="callout">One concept. One learning loop. Four sessions.</p>
+      </div>
+    </section>
+
+    <!-- ===== MVP ===== -->
+    <section class="block alt-bg" id="mvp">
+      <div class="wrap">
+        <span class="eyebrow">MVP &amp; Impact</span>
+        <h2 class="title">From a blank page to a meaningful decision</h2>
+        <p class="lead">
+          Our MVP explores a simple question: can AI provide useful information without becoming the authority
+          in a learner's creative process?
+        </p>
+        <p class="lead">
+          In one example session, a student sets an intention around line density, creates a pencil drawing on A4
+          paper, observes the result independently, and then receives one AI-generated description based on
+          measurable visual data. The AI does not tell the student what to fix. Instead, it asks the student to
+          decide whether the difference is an intention, a discovery, or something to change.
+        </p>
+        <div class="video-box">
+          <div>
+            <button class="play-btn" aria-label="Watch the MVP demo video">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <h3>Watch MVP Demo</h3>
+            <p class="lead" style="margin: 8px auto 0;">Watch the full learning experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== What We Are Learning ===== -->
+    <section class="block" id="learning">
+      <div class="wrap">
+        <span class="eyebrow">What We Are Learning</span>
+        <h2 class="title">We measure more than whether the app works.</h2>
+        <p class="lead">
+          Adimi's MVP is designed to test whether learners can actually use feedback to make their own decisions.
+          Our pilot focuses on three questions:
+        </p>
+        <div class="grid grid-3">
+          <div class="card"><h3>Feasibility</h3><p>Can students complete the full learning loop?</p></div>
+          <div class="card"><h3>Agency</h3><p>Can students choose to keep, edit or think further, and explain their decision in their own words?</p></div>
+          <div class="card"><h3>Feedback boundaries</h3><p>Can the system provide useful observations without turning feedback into grading, commands or unsupported interpretation?</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Development Journey ===== -->
+    <section class="block alt-bg" id="journey">
+      <div class="wrap">
+        <span class="eyebrow">Our Development Journey</span>
+        <h2 class="title">From one concept to a scalable learning experience</h2>
+        <div class="grid grid-3">
+          <div class="card"><span class="step-num">Stage 01</span><h3>Problem Discovery</h3><p>Understanding how students respond to feedback and whether AI observation changes their decision-making.</p></div>
+          <div class="card"><span class="step-num">Stage 02</span><h3>Measurement Validation</h3><p>Testing whether the visual measurement system remains stable across different drawing scenarios and common mobile devices.</p></div>
+          <div class="card"><span class="step-num">Stage 03</span><h3>Thin MVP</h3><p>Building and piloting the complete learning loop with students learning independently at home.</p></div>
+        </div>
+        <p class="callout">Our next milestone: will students come back for the second session?</p>
+        <p class="lead" style="text-align:center; margin: 16px auto 0;">
+          Because for Adimi, a successful learning product is not simply one that works once. It is one that makes
+          learners want to observe, decide and learn again.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Who We Serve ===== -->
+    <section class="block" id="who">
+      <div class="wrap">
+        <span class="eyebrow">Who We Serve</span>
+        <h2 class="title">Making creative learning more accessible</h2>
+        <div class="grid grid-4">
+          <div class="card"><h3>For Students</h3><p>A space to learn art, experiment and develop their own creative decisions.</p></div>
+          <div class="card"><h3>For Parents</h3><p>A learning experience focused not only on the final artwork, but also on how children observe and think.</p></div>
+          <div class="card"><h3>For Schools</h3><p>A potential self-learning tool for contexts where access to art teachers is limited.</p></div>
+          <div class="card"><h3>For NGOs, Foundations &amp; CSR</h3><p>A scalable approach to bringing creative learning opportunities to underserved communities.</p></div>
+        </div>
+        <p class="lead" style="margin-top: 28px;">
+          Adimi's initial impact model focuses on middle-school students in rural and underserved areas, while a
+          future consumer pathway can serve urban and suburban families.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Our Team ===== -->
+    <section class="block alt-bg" id="team">
+      <div class="wrap">
+        <span class="eyebrow">Our Team</span>
+        <h2 class="title">Education · Art · AI · Product · Technology</h2>
+        <p class="lead">
+          Adimi is built by an interdisciplinary team combining education, artificial intelligence, art education,
+          product design, technology, finance and marketing. Our 17-member team is distributed across Sydney,
+          Hanoi, Da Nang, Ho Chi Minh City and Quang Ngai.
+        </p>
+
+        <h3 class="subhead">Leadership</h3>
+        <div class="grid grid-4">
+          <div class="card team-member">
+            <div class="avatar" aria-hidden="true">MH</div>
+            <strong>Nguyễn Thị Minh Hiển</strong>
+            <div class="role">Education Lead · Team Lead</div>
+            <div class="cred">M.Ed. TESOL, University of Sydney · Australia Awards Scholar</div>
+          </div>
+          <div class="card team-member">
+            <div class="avatar" aria-hidden="true">ĐN</div>
+            <strong>Nguyễn Đăng Nhật</strong>
+            <div class="role">Development Lead</div>
+            <div class="cred">M.Sc. Artificial Intelligence, Macquarie University</div>
+          </div>
+          <div class="card team-member">
+            <div class="avatar" aria-hidden="true">QH</div>
+            <strong>Đỗ Quang Hòa</strong>
+            <div class="role">Art Advisor</div>
+            <div class="cred">Art Teacher, Vinschool Hanoi</div>
+          </div>
+          <div class="card team-member">
+            <div class="avatar" aria-hidden="true">TT</div>
+            <strong>Hoàng Thùy Trang</strong>
+            <div class="role">Finance Lead</div>
+            <div class="cred">Chevening Scholar · M.Sc. Finance</div>
+          </div>
+        </div>
+
+        <h3 class="subhead">Our wider team</h3>
+        <div class="pill-row">
+          <div class="pill"><strong>Technology</strong><span>AI · Backend · Frontend</span></div>
+          <div class="pill"><strong>Product &amp; Content</strong><span>Project Management · UX/UI · Education</span></div>
+          <div class="pill"><strong>Operations</strong><span>Marketing · Finance</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Values ===== -->
+    <section class="block" id="values">
+      <div class="wrap">
+        <span class="eyebrow">Our Values</span>
+        <h2 class="title">Human-centred by design</h2>
+        <div class="grid grid-3">
+          <div class="card"><h3>Agency</h3><p>We believe learners should remain the authors of their own decisions.</p></div>
+          <div class="card"><h3>Curiosity</h3><p>Unexpected results are not necessarily mistakes. They can become discoveries.</p></div>
+          <div class="card"><h3>Evidence</h3><p>AI should distinguish between what it can measure and what it cannot know.</p></div>
+          <div class="card"><h3>Responsibility</h3><p>Technology for children needs clear boundaries — especially when AI is involved.</p></div>
+          <div class="card"><h3>Creativity</h3><p>The goal is not to make AI more creative than the learner. The goal is to help the learner become more creative.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Trust & Child Safety ===== -->
+    <section class="block alt-bg" id="trust">
+      <div class="wrap">
+        <span class="eyebrow">Trust &amp; Child Safety</span>
+        <h2 class="title">Technology children can learn with, and adults can trust.</h2>
+        <p class="lead">
+          Adimi is intentionally designed with boundaries around what the system can and cannot do. We do not use
+          children's artwork to train models, do not grade their artistic ability, and do not infer personality or
+          psychological states from their work.
+        </p>
+        <p class="lead">
+          Our architecture is also designed toward on-device image processing, reducing the need for children's
+          artwork to leave the device.
+        </p>
+        <p class="callout">Child safety is not an additional feature. It is part of the product architecture.</p>
+      </div>
+    </section>
+
+    <!-- ===== Partnership ===== -->
+    <section class="block" id="partnership">
+      <div class="wrap">
+        <span class="eyebrow">Partnership</span>
+        <h2 class="title">Let's build the future of creative learning together.</h2>
+        <p class="lead">
+          Adimi is currently looking to work with organisations that share our belief in human-centred AI and
+          accessible creative education.
+        </p>
+        <div class="grid grid-3">
+          <div class="card"><h3>Schools</h3><p>Pilot Adimi with students and explore new models of art learning.</p></div>
+          <div class="card"><h3>NGOs &amp; Foundations</h3><p>Bring creative learning opportunities to underserved communities.</p></div>
+          <div class="card"><h3>CSR Programs</h3><p>Support measurable educational impact through technology.</p></div>
+          <div class="card"><h3>Education &amp; Technology Partners</h3><p>Help us test, improve and scale a new model of AI-supported creative learning.</p></div>
+          <div class="card"><h3>Parents &amp; Families</h3><p>Join our early learning community and help us understand how children learn with Adimi.</p></div>
+        </div>
+        <div class="actions" style="margin-top: 34px;">
+          <a class="btn btn-primary" href="#contact">Become a Partner</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="block alt-bg" id="contact">
+      <div class="wrap">
+        <span class="eyebrow">Contact</span>
+        <h2 class="title">Have an idea, a question, or a partnership opportunity?</h2>
+        <p class="lead">We would love to hear from you.</p>
+
+        <div class="contact-card">
+          <h3>Adimi</h3>
+          <p>AI-powered art learning for creativity and agency.</p>
+          <p>Email: <a class="link" href="mailto:edimiedulab@gmail.com">edimiedulab@gmail.com</a></p>
+          <p>LinkedIn: <a class="link" href="https://www.linkedin.com/company/adimi/" target="_blank" rel="noopener noreferrer">linkedin.com/company/adimi</a></p>
+          <a class="btn btn-primary" href="mailto:edimiedulab@gmail.com">Contact Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="logo" href="#home" aria-label="Adimi home">
+            <span class="logo-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M12 3l2.5 5.5L20 11l-5.5 2.5L12 19l-2.5-5.5L4 11l5.5-2.5L12 3z" fill="currentColor"/></svg>
+            </span>
+            <span>Adimi</span>
+          </a>
+          <p>Students draw. AI compares. Students decide.</p>
+          <p class="micro">Education · Art · AI · Human Agency</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <span class="footer-title">Explore</span>
+          <a href="#about">About Adimi</a>
+          <a href="#solution">Our Solution</a>
+          <a href="#mvp">MVP</a>
+          <a href="#team">Our Team</a>
+          <a href="#partnership">Partner with Us</a>
+        </nav>
+        <div class="footer-links">
+          <span class="footer-title">Contact</span>
+          <a href="mailto:edimiedulab@gmail.com">edimiedulab@gmail.com</a>
+          <a href="https://www.linkedin.com/company/adimi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Adimi. AI-powered art learning for creativity and agency. All rights reserved.
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
