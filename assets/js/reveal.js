@@ -39,3 +39,40 @@
 
   els.forEach(function (el) { io.observe(el); });
 })();
+
+/* Mobile navigation toggle (independent of scroll-reveal). */
+(function () {
+  var toggle = document.querySelector('.nav-toggle');
+  var menu = document.getElementById('nav-menu');
+  if (!toggle || !menu) return;
+
+  function close() {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+  }
+  function open() {
+    menu.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+  }
+
+  toggle.addEventListener('click', function () {
+    if (menu.classList.contains('open')) { close(); } else { open(); }
+  });
+
+  // Close after choosing a destination
+  menu.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') close();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') close();
+  });
+
+  // Reset when resizing up to desktop
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 768) close();
+  });
+})();
